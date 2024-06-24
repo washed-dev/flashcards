@@ -5,3 +5,6 @@
     border: 1px solid black;
     text-align: center;
 }
+.incorrect {
+    background-color: rgba(180, 98, 98, 0.527);
+}
