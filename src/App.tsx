@@ -1,18 +1,28 @@
 import React, { CSSProperties, StyleHTMLAttributes, useState } from "react";
 import Card from "./Card/Card";
 import "./App.css";
-interface CardType {
-  prompt: string;
-  options: string[];
-  answer: string;
-}
+import { Answer, Flashcard } from "./Model";
+import AnswerDeck from "./Card/AnswerDeck";
 function App() {
-  let hablar = {
-    prompt: "hablar",
-    options: ["to speak", "to run", "to eat", "to sleep"],
-    answer: "to speak",
+  let dar: Flashcard = {
+    question: "dar",
+    answers: [
+      { text: "to speak", isCorrect: false },
+      { text: "to give", isCorrect: true },
+      { text: "to run", isCorrect: false },
+      { text: "to eat", isCorrect: false },
+    ],
   };
-  const [card, setCard] = useState<CardType>(hablar);
+  let hablar: Flashcard = {
+    question: "hablar",
+    answers: [
+      { text: "to speak", isCorrect: true },
+      { text: "to run", isCorrect: false },
+      { text: "to eat", isCorrect: false },
+      { text: "to sleep", isCorrect: false },
+    ],
+  };
+  const [card, setCard] = useState<Flashcard>(hablar);
 
   const swapElements = (input: Object[], begin: number, end: number) => {
     let temp = input[end];
@@ -30,23 +40,24 @@ function App() {
       swapElements(input, i, Math.floor(seed * n));
     }
   }
-  function select(): void {
-    randomize(card.options);
-    setCard((prevState) => {
-      return { ...card, options: card.options };
-    });
+  function next(): void {
+    console.dir([card, dar, hablar]);
+    if (card.question == dar.question) setCard(hablar);
+    if (card.question == hablar.question) setCard(dar);
+    //if isCorrect
+    //nextCard
+    //else highlight
   }
   return (
     <div className="App">
       <div className="container">
         <div id="question-container">
-          <Card select={select} text={card.prompt} />
+          <div className="card">
+            <p>{card.question}</p>
+          </div>
         </div>
         <div id="answer-container">
-          <Card select={select} text={card.options[0]} />
-          <Card select={select} text={card.options[1]} />
-          <Card select={select} text={card.options[2]} />
-          <Card select={select} text={card.options[3]} />
+          <AnswerDeck next={next} answers={card.answers} />
         </div>
       </div>
     </div>
