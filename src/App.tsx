@@ -1,53 +1,52 @@
 import React, { CSSProperties, StyleHTMLAttributes, useState } from "react";
-import Card from "./Card";
-const getImg = (n: number) => {
-  return `cat${n}.jpg`;
-};
-//Good
-const swapElements = (input: number[], begin: number, end: number) => {
-  let temp = input[end];
-  input[end] = input[begin];
-  input[begin] = temp;
-  return input;
-};
-
-const ContainerStyle: CSSProperties = {
-  display: "flex",
-  width: "100%",
-  alignItems: "center",
-  justifyContent: "center",
-};
-const BoxStyle: CSSProperties = {
-  display: "flex",
-  alignItems: "flex-end",
-  justifyContent: "center",
-  width: "400px",
-  border: "1px solid black",
-  paddingTop: "10px",
-  paddingBottom: "10px",
-};
-
+import Card from "./Card/Card";
+import "./App.css";
+interface CardType {
+  prompt: string;
+  options: string[];
+  answer: string;
+}
 function App() {
-  const [imgs, setImgs] = useState<number[]>([3, 2, 1]);
-  const randomizeArray = (input: number[]) => {
+  let hablar = {
+    prompt: "hablar",
+    options: ["to speak", "to run", "to eat", "to sleep"],
+    answer: "to speak",
+  };
+  const [card, setCard] = useState<CardType>(hablar);
+
+  const swapElements = (input: Object[], begin: number, end: number) => {
+    let temp = input[end];
+    input[end] = input[begin];
+    input[begin] = temp;
+    return input;
+  };
+
+  function randomize(input: Object[]) {
+    console.dir(input);
     let n = input.length;
     for (var i = 0; i < n; i++) {
       let seed = Math.random();
       seed = seed !== 1 ? seed : 0;
       swapElements(input, i, Math.floor(seed * n));
     }
-    setImgs(new Array(...input));
-  };
-  const select = () => {
-    randomizeArray(imgs);
-  };
+  }
+  function select(): void {
+    randomize(card.options);
+    setCard((prevState) => {
+      return { ...card, options: card.options };
+    });
+  }
   return (
     <div className="App">
-      <div style={ContainerStyle} className="container">
-        <div style={BoxStyle}>
-          <Card select={select} img={getImg(imgs[0])} />
-          <Card select={select} img={getImg(imgs[1])} />
-          <Card select={select} img={getImg(imgs[2])} />
+      <div className="container">
+        <div id="question-container">
+          <Card select={select} text={card.prompt} />
+        </div>
+        <div id="answer-container">
+          <Card select={select} text={card.options[0]} />
+          <Card select={select} text={card.options[1]} />
+          <Card select={select} text={card.options[2]} />
+          <Card select={select} text={card.options[3]} />
         </div>
       </div>
     </div>
