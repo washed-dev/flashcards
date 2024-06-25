@@ -1,0 +1,44 @@
+[
+  {
+    "id": "Spanish Verbs",
+    "draw": [
+      {
+        "question": "dar",
+        "answers": [
+          { "text": "to speak", "isCorrect": false },
+          { "text": "to give", "isCorrect": true },
+          { "text": "to run", "isCorrect": false },
+          { "text": "to eat", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "hablar",
+        "answers": [
+          { "text": "to speak", "isCorrect": true },
+          { "text": "to run", "isCorrect": false },
+          { "text": "to eat", "isCorrect": false },
+          { "text": "to sleep", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "comer",
+        "answers": [
+          { "text": "to speak", "isCorrect": false },
+          { "text": "to run", "isCorrect": false },
+          { "text": "to eat", "isCorrect": true },
+          { "text": "to sleep", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "correr",
+        "answers": [
+          { "text": "to speak", "isCorrect": false },
+          { "text": "to run", "isCorrect": true },
+          { "text": "to eat", "isCorrect": false },
+          { "text": "to sleep", "isCorrect": false }
+        ]
+      }
+    ],
+    "discard": []
+  }
+]

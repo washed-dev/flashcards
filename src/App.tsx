@@ -1,49 +1,34 @@
-import React, { CSSProperties, StyleHTMLAttributes, useState } from "react";
-import Card from "./Card/Card";
+import React, { useState } from "react";
 import "./App.css";
-import { Answer, Flashcard } from "./Model";
+import data from "./data.json";
+import { Flashcard, Deck } from "./Model";
 import AnswerDeck from "./Card/AnswerDeck";
-function App() {
-  let dar: Flashcard = {
-    question: "dar",
-    answers: [
-      { text: "to speak", isCorrect: false },
-      { text: "to give", isCorrect: true },
-      { text: "to run", isCorrect: false },
-      { text: "to eat", isCorrect: false },
-    ],
-  };
-  let hablar: Flashcard = {
-    question: "hablar",
-    answers: [
-      { text: "to speak", isCorrect: true },
-      { text: "to run", isCorrect: false },
-      { text: "to eat", isCorrect: false },
-      { text: "to sleep", isCorrect: false },
-    ],
-  };
-  const [card, setCard] = useState<Flashcard>(hablar);
-
-  const swapElements = (input: Object[], begin: number, end: number) => {
-    let temp = input[end];
-    input[end] = input[begin];
-    input[begin] = temp;
-    return input;
-  };
-
-  function randomize(input: Object[]) {
-    console.dir(input);
-    let n = input.length;
-    for (var i = 0; i < n; i++) {
-      let seed = Math.random();
-      seed = seed !== 1 ? seed : 0;
-      swapElements(input, i, Math.floor(seed * n));
-    }
+const swapElements = (input: Object[], begin: number, end: number) => {
+  let temp = input[end];
+  input[end] = input[begin];
+  input[begin] = temp;
+  return input;
+};
+export function randomize(input: Object[]) {
+  console.dir(input);
+  let n = input.length;
+  for (var i = 0; i < n; i++) {
+    let seed = Math.random();
+    swapElements(input, i, Math.floor(seed * n));
   }
+}
+function App() {
+  const [deck, setDeck] = useState<Deck>(data[0]);
+
   function next(): void {
-    console.dir([card, dar, hablar]);
-    if (card.question == dar.question) setCard(hablar);
-    if (card.question == hablar.question) setCard(dar);
+    setDeck((prevState): Deck => {
+      let newDiscard = [...prevState.discard, prevState.draw[0]];
+      let newDraw = prevState.draw.slice(1);
+      if (newDraw.length === 0) randomize(newDiscard);
+      return newDraw.length > 0
+        ? { ...prevState, discard: newDiscard, draw: newDraw }
+        : { ...prevState, discard: newDraw, draw: newDiscard };
+    });
     //if isCorrect
     //nextCard
     //else highlight
@@ -53,11 +38,11 @@ function App() {
       <div className="container">
         <div id="question-container">
           <div className="card">
-            <p>{card.question}</p>
+            <p>{deck.draw[0].question}</p>
           </div>
         </div>
         <div id="answer-container">
-          <AnswerDeck next={next} answers={card.answers} />
+          <AnswerDeck next={next} answers={deck.draw[0].answers} />
         </div>
       </div>
     </div>
