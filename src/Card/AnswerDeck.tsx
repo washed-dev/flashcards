@@ -1,11 +1,12 @@
 import { Answer } from "../Model";
 import Card from "./Card";
-
+import { randomize } from "../App";
 export type Props = {
   answers: Answer[];
   next: Function;
 };
 function AnswerDeck({ answers, next }: Props) {
+  randomize(answers);
   return (
     <>
       <Card next={next} answer={answers[0]} />
