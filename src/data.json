@@ -40,5 +40,89 @@
       }
     ],
     "discard": []
+  },
+  {
+    "id": "Spanish Nouns",
+    "draw": [
+      {
+        "question": "car",
+        "answers": [
+          { "text": "asdjf;as", "isCorrect": false },
+          { "text": "auto", "isCorrect": true },
+          { "text": "asdjf;safafs", "isCorrect": false },
+          { "text": "dfsafsd", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "motorcycle",
+        "answers": [
+          { "text": "motocicleta", "isCorrect": true },
+          { "text": "b1", "isCorrect": false },
+          { "text": "bb32b23", "isCorrect": false },
+          { "text": "sadfhjl", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "dog",
+        "answers": [
+          { "text": "pero", "isCorrect": false },
+          { "text": "rodilla", "isCorrect": false },
+          { "text": "perro", "isCorrect": true },
+          { "text": "pendejo", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "cat",
+        "answers": [
+          { "text": "perro", "isCorrect": false },
+          { "text": "gato", "isCorrect": true },
+          { "text": "felina", "isCorrect": false },
+          { "text": "cato", "isCorrect": false }
+        ]
+      }
+    ],
+    "discard": []
+  },
+  {
+    "id": "Assembly Params",
+    "draw": [
+      {
+        "question": "int 0x80 arg1 - arg6",
+        "answers": [
+          { "text": "ebx, ecx, edx, esi, edi, ebp", "isCorrect": true },
+          { "text": "ebx, ecx, edx, edi, esi, ebp", "isCorrect": false },
+          { "text": "ebx, ecx, edx, edi, esi, stack", "isCorrect": false },
+          { "text": "edi, esi, edx, e10, e8, e9", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "syscall arg1 - arg6",
+        "answers": [
+          { "text": "rdi, rsi, rdx, r10, r8, r9", "isCorrect": true },
+          { "text": "rdi, rsi, rdx, rcx, r8, r9", "isCorrect": false },
+          { "text": "rbx, rcx, rdx, rsi, rdi, rbp", "isCorrect": false },
+          { "text": "rbx, rcx, rdx, rdi, rsi, rbp", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "call arg1 - arg6",
+        "answers": [
+          { "text": "rdi, rsi, rdx, rcx, r8, r9", "isCorrect": true },
+          { "text": "Top of Stack - Bottom of Stack", "isCorrect": false },
+          { "text": "Bottom of Stack - Top of Stack", "isCorrect": false },
+          { "text": "rdi, rsi, rdx, r10, r8, r9", "isCorrect": false }
+        ]
+      },
+      {
+        "question": "call arg7 - arg12",
+        "answers": [
+          { "text": "rdi, rsi, rdx, rcx, r8, r9", "isCorrect": false },
+          { "text": "Top of Stack - Bottom of Stack", "isCorrect": true },
+          { "text": "Bottom of Stack - Top of Stack", "isCorrect": false },
+          { "text": "r1, r2, r3, r4, r5, r6", "isCorrect": false }
+        ]
+      }
+    ],
+    "discard": []
   }
 ]

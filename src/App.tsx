@@ -3,12 +3,17 @@ import "./App.css";
 import data from "./data.json";
 import { Flashcard, Deck } from "./Model";
 import AnswerDeck from "./Card/AnswerDeck";
+import { Link, useParams } from "react-router-dom";
 const swapElements = (input: Object[], begin: number, end: number) => {
   let temp = input[end];
   input[end] = input[begin];
   input[begin] = temp;
   return input;
 };
+type Params = {
+  deckId: number;
+};
+
 export function randomize(input: Object[]) {
   console.dir(input);
   let n = input.length;
@@ -18,8 +23,10 @@ export function randomize(input: Object[]) {
   }
 }
 function App() {
-  const [deck, setDeck] = useState<Deck>(data[0]);
-
+  let deckId = useParams().deckId;
+  if (deckId === undefined) deckId = "0";
+  let deckNum: number = Number.parseInt(deckId);
+  const [deck, setDeck] = useState<Deck>(data[deckNum]);
   function next(): void {
     setDeck((prevState): Deck => {
       let newDiscard = [...prevState.discard, prevState.draw[0]];
@@ -44,6 +51,9 @@ function App() {
         <div id="answer-container">
           <AnswerDeck next={next} answers={deck.draw[0].answers} />
         </div>
+        <Link to="/dashboard">
+          <button id="dashboard-btn">dashboard</button>
+        </Link>
       </div>
     </div>
   );
