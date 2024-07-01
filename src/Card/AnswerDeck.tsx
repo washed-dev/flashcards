@@ -9,10 +9,9 @@ function AnswerDeck({ answers, next }: Props) {
   randomize(answers);
   return (
     <>
-      <Card next={next} answer={answers[0]} />
-      <Card next={next} answer={answers[1]} />
-      <Card next={next} answer={answers[2]} />
-      <Card next={next} answer={answers[3]} />
+      {answers.map((e, i) => (
+        <Card answer={answers[i]} next={next} />
+      ))}
     </>
   );
 }
